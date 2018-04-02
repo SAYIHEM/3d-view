@@ -1,8 +1,8 @@
+import React from "react";
 import { Component } from 'react';
-import {Mesh, Object3D, PerspectiveCamera, Renderer, Scene} from 'react-three';
+import React3 from 'react-three-renderer';
 import * as THREE from 'three';
-import React from 'react';
-import {ExampleScene} from '../cupcake';
+
 
 class ModelView extends Component {
 
@@ -12,7 +12,14 @@ class ModelView extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {width: props.width, height: props.height};
+    this.state = {
+        width: props.width ? props.width : 100,
+        height: props.height ? props.height : 100,
+        cameraPosition: props.cameraPosition ? props.cameraPosition : new THREE.Vector3(0, 0, 5),
+        cubeRotation: new THREE.Euler()
+    };
+
+    console.log(this.state);
   }
 
   render() {
@@ -29,47 +36,72 @@ class ModelView extends Component {
       };
 
       renderer = (
-        <Renderer width={this.state.width} heigth={this.state.height}>
-          <Scene camera='maincamera' width={this.state.width} height={this.state.width}>
-            <PerspectiveCamera name='maincamera' {...cameraprops}/>
+        <React3 mainCamera='camera'
+                width={this.state.width}
+                height={this.state.height}
+                onAnimate={this._onAnimate()}>
+          <scene>
+            <perspectiveCamera name='camera'
+                               fov={75}
+                               aspect={this.state.width / this.state.height}
+                               near={0.1}
+                               far={1000}
+                               position={this.state.cameraPosition}>
 
-            <Object3D quaternion={new THREE.Quaternion()}
-                      position={new THREE.Vector3(0,0,0)}
-                      material={new THREE.MeshBasicMaterial( {color: 0x00ff00} )}>
-              <Mesh position={new THREE.Vector3(0,-100,0)} geometry={THREE.BoxGeometry(200,200,200)}/>
-            </Object3D>
+            </perspectiveCamera>
+              <mesh>
+                  <boxGeometry
+                      width={1}
+                      height={1}
+                      depth={1}
+                  />
+                  <meshBasicMaterial
+                      color={0x00ff00}
+                  />
+              </mesh>
+          </scene>
+        </React3>
 
-          </Scene>
-        </Renderer>
       );
     }
 
-    var MeshFactory = React.createFactory(Mesh);
-    var boxgeometry = new THREE.BoxGeometry( 200,200,200);
-
-    var test2 = (
-      <Object3D quaternion={new THREE.Quaternion()}
-                position={new THREE.Vector3(0,0,0)}
-                material={THREE.ImageUtils.loadTexture('assets/creamPing.png')}>
-        <Mesh position={new THREE.Vector3(0,-100,0)} geometry={boxgeometry}/>
-      </Object3D>
-    );
-
-    var test = React.createElement(
-      Object3D,
-      {quaternion:new THREE.Quaternion(), position:new THREE.Vector3(0,0,0)},
-      MeshFactory({position:new THREE.Vector3(0,-100,0), geometry:boxgeometry}),
-      MeshFactory({position:new THREE.Vector3(0, 100,0), geometry:boxgeometry})
-    );
-
     return (
       <div ref='container' style={{width: '100%', height: '100%'}}>
-        {renderer}
+          <React3 mainCamera='camera'
+                  width={this.state.width}
+                  height={this.state.height}
+                  onAnimate={this._onAnimate()}>
+              <scene>
+                  <perspectiveCamera name='camera'
+                                     fov={75}
+                                     aspect={this.state.width / this.state.height}
+                                     near={0.1}
+                                     far={1000}
+                                     position={this.state.cameraPosition}>
+
+                  </perspectiveCamera>
+                  <mesh rotation={this.state.cubeRotation}>
+                      <boxGeometry
+                          width={120}
+                          height={120}
+                          depth={120}
+                      />
+                      <meshBasicMaterial
+                          color={0x00ff00}
+                      />
+                  </mesh>
+              </scene>
+          </React3>
       </div>
     );
 
 
   }
+
+  _onAnimate() {
+    console.log("ani");
+  }
+
 
   componentDidMount1() {
     let container = this.refs.container;

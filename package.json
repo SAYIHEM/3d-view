@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "15.4.1",
-    "react-dom": "15.4.1",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
     "react-scripts": "1.1.1",
-    "react-three": "^0.9.7",
-    "three": "^0.83.0"
+    "three": "^0.86.0",
+    "react-three-renderer": "3.2.4"
   },
   "scripts": {
     "start": "react-scripts start",

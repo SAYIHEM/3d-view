@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <div className="App" style={{height: '100%', width: '100%'}}>
-        <ModelView url={''} width={300} height={300}>
+        <ModelView url={''} width={window.innerWidth} height={window.innerHeight}>
         </ModelView>
       </div>
     );
