@@ -10,7 +10,7 @@ class ModelScene extends Component {
     this.state = {
       width: props.width ? props.width : 100, // TODO: Default size
       height: props.height ? props.height : 100,
-      cameraPosition: props.cameraPosition ? props.cameraPosition : new THREE.Vector3(0, 0, 6)
+      cameraPosition: props.cameraPosition ? props.cameraPosition : new THREE.Vector3(0, 0, 5)
     };
   }
 
@@ -19,7 +19,6 @@ class ModelScene extends Component {
       <React3
         ref={node => {
           if (node !== null) {
-            this.canvas = node;
             this.props.cb(this);
           }
         }}
@@ -51,28 +50,6 @@ class ModelScene extends Component {
       </React3>
     );
   }
-
-  /*componentDidMount() {
-
-    window.addEventListener('resize', this._handleWindowResize.bind(this))
-  }
-
-  componentDidUpdate() {
-
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._handleWindowResize.bind(this));
-  }
-
-  _handleWindowResize() {
-    let canvas = ReactDOM.findDOMNode(this.canvas);
-
-    this.setState({
-      width: canvas.parentNode.offsetWidth,
-      height: canvas.parentNode.offsetHeight
-    });
-  }*/
 }
 
 export default ModelScene;

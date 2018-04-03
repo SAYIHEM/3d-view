@@ -1,6 +1,5 @@
 import React from 'react';
 import { Component } from 'react';
-import ReactDOM from 'react-dom';
 import ModelScene from './ModelScene';
 import ReactResizeDetector from 'react-resize-detector';
 
@@ -21,11 +20,14 @@ class ModelView extends Component {
             this.container = node;
           }
         }}
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
+        style={{width: '100%', height: '100%'}}
       >
+        <ModelScene
+          id='modelscene'
+          width={0}
+          height={0} // TODO: Init dim better
+          cb={(n) => {this.scene = n}}
+        />
         <ReactResizeDetector
           handleWidth
           handleHeight
@@ -36,18 +38,13 @@ class ModelView extends Component {
   }
 
   componentDidMount() {
-    ReactDOM.render(
-      <ModelScene
-        id='modelscene'
-        width={this.container.clientWidth}
-        height={this.container.clientHeight}
-        cb={(n) => this.scene = n}
-      />, this.container
-    );
-
+    this.scene.setState({
+      width: this.container.clientWidth,
+      height: this.container.clientHeight
+    });
   }
 
-  onResize(width, height) {
+  onResize(width, height) { // TODO: Fix Bug when scaled to 100%
     this.scene.setState({
       width: width,
       height: height

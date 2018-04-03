@@ -8,15 +8,17 @@ class App extends Component {
     super(props, context);
 
     this.state = {
-      width: '200',
-      height: '200'
+      style: {
+        width: '100%',
+        height: '100%'
+      }
     }
   }
 
   render() {
     return (
       <div
-        style={{width: this.state.width, height: this.state.height}}
+        style={this.state.style}
         onClick={this.handleClick.bind(this)}
       >
         <ModelView/>
@@ -26,8 +28,10 @@ class App extends Component {
 
   handleClick() {
     this.setState({
-      width: '100',
-      height: '100'
+      style: {
+        width: '200px',
+        height: '200px'
+      }
     })
   }
 }
