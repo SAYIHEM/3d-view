@@ -3,6 +3,8 @@ import { Component } from 'react';
 import React3 from 'react-three-renderer';
 import * as THREE from 'three';
 import Model3D from "../threeobjects/Model3D";
+import SimpleBox from "../threeobjects/SimpleBox";
+import TrackballControls from "../../utils/controls/TrackballControls";
 
 class ModelScene extends Component {
   constructor(props, context) {
@@ -26,25 +28,37 @@ class ModelScene extends Component {
     this.react3props = {
       ref: this.props.cb(this),
       mainCamera: cameratitle,
-    }
+    };
+
+    this.props.cb(this);
   }
 
   render() {
     return (
       <React3
+        ref={(node) => {this.react3 = node; }}
         width={this.state.width}
         height={this.state.height}
         {...this.react3props}
       >
         <scene>
           <perspectiveCamera
+            ref='camera'
             position={this.state.cameraPosition}
             {...this.cameraprops}
-          />
-          <Model3D url={this.state.url} c/>
+          >
+          </perspectiveCamera>
+          <SimpleBox/>
+          {/*<Model3D url={this.state.url}/>*/}
         </scene>
+
       </React3>
     );
+  }
+
+  componentDidMount() {
+    console.log(this.react3);
+    //this.control = new TrackballControls(this.react3, this.refs.camera);
   }
 }
 

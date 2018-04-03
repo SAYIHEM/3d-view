@@ -17,7 +17,7 @@ class ModelView extends Component {
   render() {
     return (
       <div
-        ref={node => { this.container = node }}
+        ref={node => this.container = node}
         style={{width: '100%', height: '100%'}}
       >
         <ModelScene
