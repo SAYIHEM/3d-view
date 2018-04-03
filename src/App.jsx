@@ -21,7 +21,7 @@ class App extends Component {
         style={this.state.style}
         onClick={this.handleClick.bind(this)}
       >
-        <ModelView/>
+        <ModelView url={'http://people.sc.fsu.edu/~jburkardt/data/obj/airboat.obj'}/>
       </div>
     );
   }

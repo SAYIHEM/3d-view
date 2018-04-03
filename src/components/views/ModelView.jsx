@@ -9,21 +9,19 @@ class ModelView extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.state = {
+      url: props.url
+    }
   }
 
   render() {
     return (
       <div
-        id='viewcontainer'
-        ref={node => {
-          if (node !== null) {
-            this.container = node;
-          }
-        }}
+        ref={node => { this.container = node }}
         style={{width: '100%', height: '100%'}}
       >
         <ModelScene
-          id='modelscene'
+          url={this.state.url}
           width={0}
           height={0} // TODO: Init dim better
           cb={(n) => {this.scene = n}}
