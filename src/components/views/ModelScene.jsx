@@ -22,7 +22,7 @@ class ModelScene extends Component {
     this.cameraprops = {
       name: cameratitle, fov: 75,
       near: 0.1, far: 1000,
-      aspect: this.state.width / this.state.height,
+      aspect: this.state.width / this.state.height, // TODO: Update in render/fix occuring error
     };
     
     this.react3props = {

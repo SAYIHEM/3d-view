@@ -29,7 +29,7 @@ class ModelView extends Component {
         <ReactResizeDetector
           handleWidth
           handleHeight
-          onResize={this.onResize.bind(this)}
+          onResize={this.onResize}
         />
       </div>
     );
@@ -42,7 +42,7 @@ class ModelView extends Component {
     });
   }
 
-  onResize(width, height) { // TODO: Fix Bug when scaled to 100%
+  onResize = (width, height) => { // TODO: Fix Bug when scaled to 100%
     this.scene.setState({
       width: width,
       height: height
