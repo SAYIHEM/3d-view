@@ -8,10 +8,6 @@ class ModelView extends Component {
 
   constructor(props, context) {
     super(props, context);
-
-    this.state = {
-      url: props.url
-    }
   }
 
   render() {
@@ -21,9 +17,7 @@ class ModelView extends Component {
         style={{width: '100%', height: '100%'}}
       >
         <ModelScene
-          url={this.state.url}
-          width={0}
-          height={0} // TODO: Init dim better
+          url={this.props.url}
           cb={(n) => {this.scene = n}}
         />
         <ReactResizeDetector

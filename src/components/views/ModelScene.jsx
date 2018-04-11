@@ -12,17 +12,18 @@ class ModelScene extends Component {
 
     this.state = {
       url: props.url,
-      width: props.width ? props.width : 100, // TODO: Default size
-      height: props.height ? props.height : 100,
+      width: props.width ? props.width : 1, // TODO: Default size
+      height: props.height ? props.height : 1,
       cameraPosition: props.cameraPosition ? props.cameraPosition : new THREE.Vector3(0, 0, 5)
     };
 
     let cameratitle = 'camera';
     
     this.cameraprops = {
-      name: cameratitle, fov: 75,
-      near: 0.1, far: 1000,
-      aspect: this.state.width / this.state.height, // TODO: Update in render/fix occuring error
+      name: cameratitle,
+      fov: 75,
+      near: 0.1,
+      far: 1000
     };
     
     this.react3props = {
@@ -30,21 +31,23 @@ class ModelScene extends Component {
       mainCamera: cameratitle,
     };
 
+    // Callback reference to canvas container
     this.props.cb(this);
   }
 
   render() {
     return (
       <React3
-        ref={(node) => {this.react3 = node; }}
+        canvasRef={node => {this.react3 = node}}
         width={this.state.width}
         height={this.state.height}
         {...this.react3props}
       >
         <scene>
           <perspectiveCamera
-            ref='camera'
+            ref={node => {this.camera = node}}
             position={this.state.cameraPosition}
+            aspect={this.state.width / this.state.height}
             {...this.cameraprops}
           >
           </perspectiveCamera>
@@ -57,8 +60,7 @@ class ModelScene extends Component {
   }
 
   componentDidMount() {
-    console.log(this.react3);
-    //this.control = new TrackballControls(this.react3, this.refs.camera);
+    this.control = new TrackballControls(this.camera, this.react3);
   }
 }
 
