@@ -9,10 +9,7 @@ class Model3D extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      url: props.url,
-      position: props.position ? props.position : new THREE.Vector3(0, 0, 0)
-    };
+    this.props.position = props.position ? props.position : THREE.Vector3(0, 0, 0);
   }
 
   render() {
@@ -21,7 +18,7 @@ class Model3D extends Component {
         ref='modelcontainer'
         castShadow
         receiveShadow
-        position={this.state.position}
+        position={this.props.position}
       >
 
       </group>
@@ -30,9 +27,7 @@ class Model3D extends Component {
 
   componentDidMount() {
     let callback = (model) => this.refs.modelcontainer.add(model);
-    let loader = new ModelLoader(this.state.url, callback);
-
-    this.refs.modelcontainer.add();
+    let loader = new ModelLoader(this.props.url, callback);
   }
 }
 

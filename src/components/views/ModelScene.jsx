@@ -11,7 +11,6 @@ class ModelScene extends Component {
     super(props, context);
 
     this.state = {
-      url: props.url,
       width: props.width ? props.width : 1, // TODO: Default size
       height: props.height ? props.height : 1,
       cameraPosition: props.cameraPosition ? props.cameraPosition : new THREE.Vector3(0, 0, 5)
@@ -52,7 +51,7 @@ class ModelScene extends Component {
           >
           </perspectiveCamera>
           <SimpleBox/>
-          {/*<Model3D url={this.state.url}/>*/}
+          {/*<Model3D url={this.props.url}/>*/}
         </scene>
 
       </React3>
